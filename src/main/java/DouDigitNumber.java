@@ -1,46 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class DouDigitNumber {
 
     private static final int EXIST = 1;
-    public static final String NO = "n";
-    public static final String YES = "y";
-    public static final int DOU_DIGIT = 2;
+    private static final String NO = "n";
+    private static final String YES = "y";
+    private static final int DOU_DIGIT = 2;
     private final char[] numbers ={'0','1','2','3','4','5','6','7','8','9'};
 
     public String isDouDigit(int number) {
-        if (isLowerThanDouDigits(number)) return YES;
-
-        String strNumber = toString(Math.abs(number));
-        int[] digits = new int[numbers.length];
         String isDouDigit = NO;
-        for (int index = 0; index < strNumber.length();index++){
-            for (int num = 0; num < numbers.length ;num++){
-                if (strNumber.charAt(index) == numbers[num]){
-                    digits[num] = EXIST;
-                }
+        if (isLowerThanThreeDigits(number)) {
+            isDouDigit =YES;
+        } else{
+            int numberOfDiffDigits = getDiffDigits(number).size();
+            if (numberOfDiffDigits <= DOU_DIGIT){
+                isDouDigit = YES;
             }
-        }
-
-        if (getNumberOfDifferentDigits(digits) <= DOU_DIGIT){
-            isDouDigit = YES;
         }
         return isDouDigit;
     }
 
-    private int getNumberOfDifferentDigits(int[] digits) {
-        int count = 0;
+    public List<Integer> getDiffDigits(int number){
+        String strNumber = convertToString(Math.abs(number));
+        int[] existDigits = getExistDigits(strNumber);
+        List<Integer> diffDigits = new ArrayList<>();
         for (int num = 0; num < numbers.length; num++){
-            if (digits[num] == EXIST){
-                count++;
+            if (existDigits[num] == EXIST){
+                diffDigits.add(num);
             }
         }
-        return count;
+        return diffDigits;
     }
 
-    private boolean isLowerThanDouDigits(int number) {
-        return number < 100 && number > -100;
+    private int[] getExistDigits(String strNumber) {
+        int[] existDigits = new int[numbers.length];
+        for (int index = 0; index < strNumber.length(); index++){
+            for (int num = 0; num < numbers.length ;num++){
+                if (strNumber.charAt(index) == numbers[num]){
+                    existDigits[num] = EXIST;
+                }
+            }
+        }
+        return existDigits;
     }
 
-    private String toString(int number) {
+    private boolean isLowerThanThreeDigits(int number) {
+        return Math.abs(number) < 100;
+    }
+
+    private String convertToString(int number) {
         return String.valueOf(number);
     }
+
 }

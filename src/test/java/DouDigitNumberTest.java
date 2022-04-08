@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class DouDigitNumberTest {
 
     @Test
@@ -171,6 +175,36 @@ public class DouDigitNumberTest {
         String result = douDigitNumber.isDouDigit(number);
 
         Assertions.assertEquals("y",result);
+    }
+
+    @Test
+    void should_return_12_Given_negative_1112121() {
+        DouDigitNumber douDigitNumber = new DouDigitNumber();
+        int number = 1112121;
+
+        String result = douDigitNumber.isDouDigit(number);
+        List diffDigits = douDigitNumber.getDiffDigits(number);
+        List<Integer> expectedDiffDigits = new ArrayList<>();
+        expectedDiffDigits.add(1);
+        expectedDiffDigits.add(2);
+        Assertions.assertEquals("y",result);
+        Assertions.assertEquals(expectedDiffDigits,diffDigits);
+    }
+
+    @Test
+    void should_return_45678_Given_negative_4654587() {
+        DouDigitNumber douDigitNumber = new DouDigitNumber();
+        int number = -4654587;
+        String result = douDigitNumber.isDouDigit(number);
+        List diffDigits = douDigitNumber.getDiffDigits(number);
+        List<Integer> expectedDiffDigits = new ArrayList<>();
+        expectedDiffDigits.add(4);
+        expectedDiffDigits.add(5);
+        expectedDiffDigits.add(6);
+        expectedDiffDigits.add(7);
+        expectedDiffDigits.add(8);
+        Assertions.assertEquals("n",result);
+        Assertions.assertEquals(expectedDiffDigits,diffDigits);
     }
 
 
