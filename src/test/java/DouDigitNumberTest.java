@@ -173,5 +173,15 @@ public class DouDigitNumberTest {
         Assertions.assertEquals("y",result);
     }
 
+    @Test
+    void should_return_12_Given_negative_1112121() {
+        DouDigitNumber douDigitNumber = new DouDigitNumber();
+        int number = 1112121;
+
+        String result = douDigitNumber.isDouDigit(number);
+
+        Assertions.assertEquals("y",result);
+    }
+
 
 }
