@@ -7,23 +7,29 @@ public class DouDigitNumber {
     private final char[] numbers ={'0','1','2','3','4','5','6','7','8','9'};
 
     public String isDouDigit(int number) {
-        if (isLowerThanDouDigits(number)) return YES;
-
-        String strNumber = toString(Math.abs(number));
-        int[] digits = new int[numbers.length];
         String isDouDigit = NO;
-        for (int index = 0; index < strNumber.length();index++){
+        if (isLowerThanDouDigits(number)) {
+            isDouDigit =YES;
+        }else{
+            String strNumber = convertToString(Math.abs(number));
+            int[] diffDigits = getDiffDigits(strNumber);
+            if (getNumberOfDifferentDigits(diffDigits) <= DOU_DIGIT){
+                isDouDigit = YES;
+            }
+        }
+        return isDouDigit;
+    }
+
+    private int[] getDiffDigits(String strNumber) {
+        int[] diffDigits = new int[numbers.length];
+        for (int index = 0; index < strNumber.length(); index++){
             for (int num = 0; num < numbers.length ;num++){
                 if (strNumber.charAt(index) == numbers[num]){
-                    digits[num] = EXIST;
+                    diffDigits[num] = EXIST;
                 }
             }
         }
-
-        if (getNumberOfDifferentDigits(digits) <= DOU_DIGIT){
-            isDouDigit = YES;
-        }
-        return isDouDigit;
+        return diffDigits;
     }
 
     private int getNumberOfDifferentDigits(int[] digits) {
@@ -40,7 +46,8 @@ public class DouDigitNumber {
         return number < 100 && number > -100;
     }
 
-    private String toString(int number) {
+    private String convertToString(int number) {
         return String.valueOf(number);
     }
+
 }
