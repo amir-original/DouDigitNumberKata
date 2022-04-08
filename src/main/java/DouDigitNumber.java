@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class DouDigitNumber {
 
     private static final int EXIST = 1;
@@ -11,35 +14,36 @@ public class DouDigitNumber {
         if (isLowerThanDouDigits(number)) {
             isDouDigit =YES;
         }else{
-            String strNumber = convertToString(Math.abs(number));
-            int[] diffDigits = getDiffDigits(strNumber);
-            if (getNumberOfDifferentDigits(diffDigits) <= DOU_DIGIT){
+            int numberOfDiffDigits = getDiffDigits(number).size();
+            if (numberOfDiffDigits <= DOU_DIGIT){
                 isDouDigit = YES;
             }
         }
         return isDouDigit;
     }
 
-    private int[] getDiffDigits(String strNumber) {
-        int[] diffDigits = new int[numbers.length];
-        for (int index = 0; index < strNumber.length(); index++){
-            for (int num = 0; num < numbers.length ;num++){
-                if (strNumber.charAt(index) == numbers[num]){
-                    diffDigits[num] = EXIST;
-                }
+    public List<Integer> getDiffDigits(int number){
+        String strNumber = convertToString(Math.abs(number));
+        int[] existDigits = getExistDigits(strNumber);
+        List<Integer> diffDigits = new ArrayList<>();
+        for (int num = 0; num < numbers.length; num++){
+            if (existDigits[num] == EXIST){
+                diffDigits.add(num);
             }
         }
         return diffDigits;
     }
 
-    private int getNumberOfDifferentDigits(int[] digits) {
-        int count = 0;
-        for (int num = 0; num < numbers.length; num++){
-            if (digits[num] == EXIST){
-                count++;
+    private int[] getExistDigits(String strNumber) {
+        int[] existDigits = new int[numbers.length];
+        for (int index = 0; index < strNumber.length(); index++){
+            for (int num = 0; num < numbers.length ;num++){
+                if (strNumber.charAt(index) == numbers[num]){
+                    existDigits[num] = EXIST;
+                }
             }
         }
-        return count;
+        return existDigits;
     }
 
     private boolean isLowerThanDouDigits(int number) {
