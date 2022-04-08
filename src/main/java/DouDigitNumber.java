@@ -10,10 +10,10 @@ public class DouDigitNumber {
         if (isLowerThanDouDigits(number)) return YES;
 
         String strNumber = toString(Math.abs(number));
-        int[] digits = new int[10];
+        int[] digits = new int[numbers.length];
         String isDouDigit = NO;
         for (int index = 0; index < strNumber.length();index++){
-            for (int num = 0; num < digits.length ;num++){
+            for (int num = 0; num < numbers.length ;num++){
                 if (strNumber.charAt(index) == numbers[num]){
                     digits[num] = EXIST;
                 }
@@ -28,7 +28,7 @@ public class DouDigitNumber {
 
     private int getNumberOfDifferentDigits(int[] digits) {
         int count = 0;
-        for (int num = 0; num < 10; num++){
+        for (int num = 0; num < numbers.length; num++){
             if (digits[num] == EXIST){
                 count++;
             }
