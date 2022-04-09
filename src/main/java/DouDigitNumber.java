@@ -11,7 +11,7 @@ public class DouDigitNumber {
 
     public String isDouDigit(int number) {
         String isDouDigit = NO;
-        if (isLowerThanDouDigits(number)) {
+        if (isLowerThanThreeDigits(number)) {
             isDouDigit =YES;
         } else{
             int numberOfDiffDigits = getDiffDigits(number).size();
@@ -46,7 +46,7 @@ public class DouDigitNumber {
         return existDigits;
     }
 
-    private boolean isLowerThanDouDigits(int number) {
+    private boolean isLowerThanThreeDigits(int number) {
         return number < 100 && number > -100;
     }
 
