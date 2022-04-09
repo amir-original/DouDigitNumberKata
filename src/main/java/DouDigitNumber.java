@@ -4,16 +4,16 @@ import java.util.List;
 public class DouDigitNumber {
 
     private static final int EXIST = 1;
-    public static final String NO = "n";
-    public static final String YES = "y";
-    public static final int DOU_DIGIT = 2;
+    private static final String NO = "n";
+    private static final String YES = "y";
+    private static final int DOU_DIGIT = 2;
     private final char[] numbers ={'0','1','2','3','4','5','6','7','8','9'};
 
     public String isDouDigit(int number) {
         String isDouDigit = NO;
         if (isLowerThanDouDigits(number)) {
             isDouDigit =YES;
-        }else{
+        } else{
             int numberOfDiffDigits = getDiffDigits(number).size();
             if (numberOfDiffDigits <= DOU_DIGIT){
                 isDouDigit = YES;
